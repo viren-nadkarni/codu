@@ -1,0 +1,66 @@
+1) For each employee retrieve his name, address, dept. name for which he works, and the name of his/her dependent. If the employee do not have a dependent, represent it as null. (Write the query using (i)union (ii)outer joins)
+
+> select fname,minit,lname,address,dname,dependentname from (select ssn,fname,minit,lname,address,dname from employee join department on dno=dnumber) as x left outer join dependent on ssn=essn;
+
+>
+
+-----------------------------
+
+2) Make a list of project numbers for projects that involve an employee whose last name is Smith either as a worker or as a manager of the department that controls the project (use joins).
+
+> select pnumber from ( (select pnumber,lname from employee, works_on, project where ssn=essn and pno=pnumber and dno=dnum)union (select pnumber,lname from employee, department, project where mgrssn=ssn and dnum=dno)) as z where z.lname='Smith';
+
+-----------------------------
+
+3) Create a new table 'dept_info' with 3 fields: dept_name, num_employees, total_salary. Insert into the table name of each department, the total number of employees in each department and the total salary earned by all the employees of that department.
+
+> create table dept_info (dept_name varchar(32), num_employees int, total_salary int);
+
+> select dname, count(dno) as num_employees, sum(salary) as total_salary from employee join department on dno=dnumber group by dname;
+
+-----------------------------
+
+4) Give all the employees of Research department a 10% hike.
+
+> update employee set salary=salary-0.1*salary where dno=5
+
+-----------------------------
+
+5) Create a view to store following information:
+	Name of the employee
+	Age
+	Address
+	Name of the project for which he works
+	Number of working hours
+   Display the information present in the view.
+
+> create view temp_view as (select fname,minit,lname,bdate,address,pname,hours from employee,works_on,project where essn=ssn and pno=pnumber);
+
+> select * from temp_view;
+
+-----------------------------
+
+6) Update the view by making John Smith work on 'ProductY' rather than 'ProductX'. Check the resulting updates in the base table. Rewrite the updates to the base tables. Drop the newly created view.
+
+> update temp_view set pname='ProductY' where fname='John' and lname='Smith';
+
+> select * from temp_view;
+
+> select fname,minit,lname,bdate,address,pname,hours from employee,works_on,project where essn=ssn and pno=pnumber;
+
+> drop view temp_view;
+
+-----------------------------
+
+7) On the newly created table 'dept_info' add the following constraints.
+	Make dept_name as primary key.
+	Put a check constraint whether number of employees should be greater than 2.
+	Add a new column 'manager_name' with a NOT NULL constraint.
+	Update the table to insert manager's name.
+	Alter the table to include a constraint on manager name the constraint being he should be a valid employee of the company (foreign key constraint).
+	Delete a tuple referring to Research dept. in the newly created table.
+	Drop the manager_name column from newly created table.
+
+> alter table dept_info add constraint dept_pkey primary key (dept_name);
+> alter table dept_info add constraint empnum_chk check count(employees)>2;
+> alter table dept_info add manager_name varchar(32);

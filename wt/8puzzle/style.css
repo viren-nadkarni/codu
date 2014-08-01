@@ -1,0 +1,32 @@
+body {
+	font-family:'Lucida Sans Unicode', sans-serif;
+	font-size:24px;
+}
+
+table {
+	border-left:2px solid;
+	border-right:2px solid;
+	border-top:2px solid;
+	border-bottom:2px solid;
+	border-collapse:collapse;
+}
+
+tr {
+	text-align:center;
+}
+
+td {
+	width:4em;
+	height:4em;
+	
+	border-left:2px solid;
+	border-top:2px solid;
+}
+
+td:hover {
+	background-color:#eee;
+}
+
+td#selected {
+	border:4px solid;
+}

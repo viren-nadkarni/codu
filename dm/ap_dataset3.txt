@@ -1,0 +1,5 @@
+1 beer,diaper,powder,bread,umbrella
+2 diaper,powder
+3 beer,diaper,milk
+4 diaper,beer,detergent
+5 beer,milk,cola

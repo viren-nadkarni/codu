@@ -1,0 +1,436 @@
+#include <graphics.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+
+#define DELAY 0
+
+int i=0,j=0,k=0;
+
+int groundpoly[]={	0,515,
+					0,672,
+					1024,672,
+					1024,509,
+					902,509,
+					780,504,		//top right
+					720,502,		//bottom right
+					542,500,		//middle
+					400,506,		//bottom left
+					319,514,		//top left
+					256,514,
+					0,515};
+
+void redraw();
+void drawtrees();
+
+void redraw()
+{
+	cleardevice();
+	
+	//draw ground
+	drawpoly(11,groundpoly);		
+	setfillstyle(CLOSE_DOT_FILL,BROWN);
+	fillpoly(11,groundpoly);
+
+	//draw tree
+	drawtrees();
+}
+
+void drawtrees()
+{
+	setcolor(DARKGRAY);
+	
+	//trunk
+	line(273,513,273,466);
+	line(274,513,274,466);
+	line(275,513,275,466);
+	
+	//branches
+	line(275,483,285,467);
+	line(272,480,264,469);
+	
+	//leaves
+	int treeleaves[]={251,379,
+					260,380,
+					264,391,
+					272,369,
+					286,368,
+					298,387,
+					307,390,
+					304,412,
+					310,417,
+					311,434,
+					308,459,
+					288,477,
+					271,472,
+					254,465,
+					243,468,
+					239,435,
+					252,415,
+					242,397,
+					254,396,
+					251,379};
+	//setcolor(GREEN);				
+	setfillstyle(CLOSE_DOT_FILL,DARKGRAY);
+	fillpoly(20,treeleaves);
+	
+	setcolor(BLACK);
+}
+
+int main(int argc, char *argv[])
+{
+	initwindow(1024,672,"Construction");
+	
+	//housekeeping	
+	floodfill(1,1,WHITE);
+	setbkcolor(WHITE);
+	setcolor(BLACK);
+	
+	redraw();
+	
+	//start digging foundation
+	while(groundpoly[15]<580)
+	{
+		groundpoly[15]++;
+
+		if(i%2 == 0)
+		{
+			groundpoly[12]--;
+			groundpoly[13]++;
+			groundpoly[16]++;
+			groundpoly[17]++;
+		}
+	
+		redraw();
+
+		drawtrees();
+		
+		delay(DELAY/2);
+		++i;
+	}
+	
+	while(groundpoly[12]!=780 || groundpoly[13]!=580 || groundpoly[16]!=319 || groundpoly[17]!=580)
+	{
+		if(groundpoly[12]<780)
+			groundpoly[12]++;
+			
+		if(groundpoly[13]<580)
+			groundpoly[13]++;
+		
+		if(groundpoly[16]>319)
+			groundpoly[16]--;
+			
+		if(groundpoly[17]<580)
+			groundpoly[17]++;
+		
+		redraw();
+		delay(DELAY/2);		
+	}
+	
+	
+	//fortify foundations
+	for(i=0;i<8;++i)
+	{
+		line(319,580-i,780,580-i);
+		delay(DELAY);
+	}
+	for(i=0;i<6;++i)
+	{
+		line(319+i,514,319+i,580);
+		line(780-i,504,780-i,580);
+		delay(DELAY);
+	}
+	
+	//build basement pillars	
+	for(i=0;i<25;++i)
+	{
+		if(i<12)
+			line(323+i,549,323+i,580);
+		
+		putpixel(352,572-i,DARKGRAY);
+		putpixel(380,572-i,DARKGRAY);
+		putpixel(386,572-i,DARKGRAY);
+		
+		putpixel(415,572-i,DARKGRAY);
+		putpixel(419,572-i,DARKGRAY);
+		putpixel(421,572-i,DARKGRAY);
+		putpixel(423,572-i,DARKGRAY);
+		putpixel(425,572-i,DARKGRAY);
+		
+		putpixel(441,572-i,DARKGRAY);
+		putpixel(442,572-i,DARKGRAY);
+		putpixel(443,572-i,DARKGRAY);
+		putpixel(444,572-i,DARKGRAY);
+		
+		delay(DELAY);
+	}
+	
+	//build basement
+	for(i=0;i<85;++i)
+	{
+		if(i<6)
+			line(325,549-i,441,549-i);				//basement ceil
+			
+		if(i<5)
+			line(441,549-i,536,575-i);				//staircase
+		
+		line(613,574-i,624,574-i);					//main pillar
+		
+		if(i<=36 && i>=30)
+			line(624,541-i+30,762,541-i+30);		//right room roof
+		
+		if(i<13)
+			line(755,573-i,762,573-i);				//right door
+		
+		delay(DELAY);
+	}
+
+
+	//theater walls
+	for(i=0;i<13;++i)
+	{
+		if(i<5)
+			line(427+i,492,427+i,545);				//theater back wall
+			
+		if(i<13)									//staircase
+		{
+			if(i%3==0)
+				j+=5;
+			line(389+j,543-i,427,543-i);
+		}
+		
+		delay(DELAY);
+	}
+
+	//roof of basement
+	for(i=0;i<8;++i)
+	{
+		if(i<6)
+		{
+			line(418,491-i,761,491-i);			//main floor
+			line(325,520-i,378,520-i);			//entrance floor
+		}
+		
+		if(i<8)									//restroom ceiling
+		{
+			line(655,540+i,684,540+i);
+			line(746,540+i,756,540+i);
+		}
+		
+		if(i<8)									//restroom top basement window
+			line(755+i,538,755+i,522);
+					
+		delay(DELAY);	
+	}
+	
+	//darken theatre
+	int theatrepoly[]={	429,491,
+						429,544,
+						450,544,
+						554,575,
+						615,575,
+						615,491,
+						429,491};
+	setfillstyle(WIDE_DOT_FILL,DARKGRAY);
+	fillpoly(7,theatrepoly);
+	
+	j=0;
+	//staircases
+	for(i=0;i<35;++i)
+	{
+		//main
+		if(i%3==0)
+			j+=5;
+		if(i<30)
+			line(365+j,515-i,378+j,515-i);
+		
+		//back
+		if(i<18)
+			line(783-j+2,504-i,790-j+2,504-i);	
+
+		delay(DELAY);			
+	}
+	
+	//basement interiors
+	for(i=0;i<10;++i)
+	{
+		//if(i<7)
+		//	line(329-i,525,334-i,525);			//under main entrance
+		
+		//theater ceil
+		if(i<7)
+		{
+			line(479+i,498,479+i,491);
+			line(501+i,498,501+i,491);
+			line(526+i,498,526+i,491);			
+			line(571+i,498,571+i,491);		
+			line(594+i,498,594+i,491);			
+		}
+		delay(DELAY);
+	}
+	
+	//restroom interiors
+	setcolor(LIGHTGRAY);
+	for(i=0;i<30;++i)
+	{
+		putpixel(655,572-i,DARKGRAY);
+		putpixel(657,572-i,DARKGRAY);
+		putpixel(659,572-i,DARKGRAY);
+		
+		putpixel(668,572-i,LIGHTGRAY);
+		putpixel(698,572-i,LIGHTGRAY);
+		putpixel(700,572-i,LIGHTGRAY);
+
+		putpixel(746,572-i,LIGHTGRAY);
+		putpixel(748,572-i,LIGHTGRAY);
+		putpixel(750,572-i,LIGHTGRAY);
+		
+		//lower floor
+		setcolor(LIGHTGRAY);
+		if(i==28)
+		{
+			line(700,555,746,555);
+			line(700,561,746,561);
+			line(700,566,746,566);
+			
+			line(684,547,745,547);
+		}
+		
+		//upper floor
+		if(i==29)
+		{
+			line(654,493,654,535);
+			line(669,493,669,535);
+
+			line(675,506,675,535);
+			line(687,506,687,535);
+			line(699,506,699,535);
+			line(711,506,711,535);
+			line(714,506,714,535);
+			line(726,506,726,535);
+			line(738,506,738,535);
+
+			line(675,506,726,506);
+			
+			line(700,506,726,535);
+			line(726,506,700,535);
+		}
+		
+		delay(DELAY);
+	}
+	
+	//restroom ceil repeat
+	setcolor(BLACK);
+	for(i=0;i<8;++i)
+	{
+		line(655,540+i,684,540+i);
+		line(746,540+i,756,540+i);
+	}
+	
+	//first floor
+	//interior pillars
+	for(i=0;i<45;++i)
+	{
+		putpixel(503,484-i,LIGHTGRAY);
+		putpixel(507,484-i,LIGHTGRAY);
+		
+		putpixel(527,484-i,LIGHTGRAY);
+		putpixel(531,484-i,LIGHTGRAY);
+		
+		putpixel(572,484-i,LIGHTGRAY);
+		putpixel(576,484-i,LIGHTGRAY);
+
+		putpixel(596,484-i,LIGHTGRAY);
+		putpixel(600,484-i,LIGHTGRAY);
+		
+		putpixel(664,484-i,LIGHTGRAY);
+		putpixel(668,484-i,LIGHTGRAY);
+		
+		delay(DELAY);
+	}
+	
+	for(i=0;i<13;++i)
+	{
+		if(i<8)				//PILLAR SUPPORTS
+		{
+			line(501,437-i,509,437-i);
+			line(525,437-i,533,437-i);
+			line(570,437-i,578,437-i);		
+			line(594,437-i,602,437-i);
+			line(662,437-i,670,437-i);
+		}
+		else				//1st floor ceil
+			line(424,430-i+8,761,430-i+8);
+				
+		delay(DELAY);
+	}
+	
+/*	
+	//paint theatre screen
+	setcolor(WHITE);
+	line(614,755,620,725);
+	setcolor(BLACK);
+*/	
+
+	//front large step
+	setcolor(LIGHTGRAY);
+	line(344,488,416,488);
+	line(344,488,344,514);
+	
+	//pilar
+	line(351,488,351,429);
+	line(358,488,358,429);
+	
+	//staircase sidebars
+	//front
+	line(413,475,374,500);
+	line(413,475,413,487);
+	line(374,510,374,500);
+	line(392,490,392,502);
+	//back
+	line(760,474,778,488);
+	line(760,474,760,484);
+	line(778,488,778,498);	
+	setcolor(BLACK);
+	
+	//FRONT ARCH
+	int frontarchpoly[]={	363,413,
+							356,413,
+							356,410,
+							351,410,
+							351,418,
+							319,419,
+							319,453,
+							325,453,
+							325,430,
+							363,429,
+							363,413};	
+	setfillstyle(SOLID_FILL,BLACK);
+	setcolor(BLACK);
+	fillpoly(11,frontarchpoly);
+	int frontarchsupport[]={325,430,
+							343,430,
+							343,475,
+							325,475,
+							325,430};
+	setfillstyle(SOLID_FILL,LIGHTGRAY);
+	setcolor(DARKGRAY);
+	fillpoly(5,frontarchsupport);
+	setcolor(BLACK);
+	
+							
+							
+	
+	
+	
+	
+	
+	
+	
+	while( !kbhit() )
+		delay(DELAY);
+	
+	//system("PAUSE");
+		
+	return EXIT_SUCCESS;
+}

@@ -1,0 +1,188 @@
+FCFS
+Enter the no. processes: 4
+Process name: 1
+Burst time: 3
+Arrival time: 0
+
+Process name: 2
+Burst time: 4
+Arrival time: 2
+
+Process name: 3
+Burst time: 1
+Arrival time: 1
+
+Process name: 4
+Burst time: 3
+Arrival time: 5
+
+Gantt chart:
+_______________________
+  1 |   3 |   2 |   4 |
+_______________________
+0   3     4     8    11
+
+
+PROCESSES       BURST TIME      ARRIVAL TIME    WAITNG TIME     TURNAROUND TIME
+1               3               0               0               3
+3               1               1               2               3
+2               4               2               2               6
+4               3               5               3               6
+
+Average waiting time: 1.75
+
+
+
+
+ 
+SJF
+Enter the no. processes: 3
+
+Process name: 1
+Burst time: 4
+
+Process name: 2
+Burst time: 5
+
+Process name: 3
+Burst time: 1
+
+Gantt chart:
+_________________
+  3 |   1 |   2 |
+_________________
+0   2     7    10
+
+
+PROCESSES       BURST TIME      WAITNG TIME     TURNAROUND TIME
+3               1               0               1
+1               4               1               5
+2               5               5               10
+
+Average waiting time: 2
+Average turnaround time: 5.33
+
+ 
+Priority
+Enter the no. processes: 4
+
+Process name: 1
+Burst time: 4
+Priority: 3
+Arrival time: 0
+
+Process name: 2
+Burst time: 5
+Priority: 1
+Arrival time: 3
+
+Process name: 3
+Burst time: 6
+Priority: 3
+Arrival time: 2
+
+Process name: 4
+Burst time: 7
+Priority: 4
+Arrival time: 6
+
+Gantt chart:
+_______________________
+  1 |   2 |   3 |   4 |
+_______________________
+0   4     9    11    22
+
+
+PROCESS    BURST TIME   PRIORITY   ARRIVAL TIME    WAITING TIME   TURNAROUND TIME
+1       	4	       3       	0	        0	        4
+2       	5	       1       	3	        5	        9
+3       	6	       3       	2	        9	       15
+4       	7	       4       	6	       15	       22
+
+Average waiting time: 7.25
+Average turnaround time: 12.75
+ 
+Round Robin
+Quantum time: 4
+
+How many processes? 4
+
+_Process id 1
+Arrival time: 0
+Burst time: 3
+
+_Process id 2
+Arrival time: 2
+Burst time: 4
+
+_Process id 3
+Arrival time: 4
+Burst time: 6
+
+_Process id 4
+Arrival time: 7
+Burst time: 5
+
+Gantt chart:
+
+----------------------------------------
+P1  |  P2  |  P3  |  P4  |  P3  |  P4  |
+----------------------------------------
+0   3      7     11     15     17     18
+
+
+_Process 1 waiting time=0
+_Process 2 waiting time=1
+_Process 3 waiting time=3
+_Process 4 waiting time=4
+
+Average waiting time= 2
+
+_Process 1 turnaround time=3
+_Process 2 turnaround time=7
+_Process 3 turnaround time=17
+_Process 4 turnaround time=18
+
+Average turnaround time= 11.25
+ 
+Banker’s Algorithm
+How many processes? 5
+How many resources? 3
+
+Allocation table:
+proc    A B C
+0       0 1 0   
+1       2 0 0
+2       3 0 2
+3       2 1 1
+4       0 0 2
+
+Max table:
+proc    A B C
+0       7 5 3    
+1       3 2 2
+2       9 0 2
+3       2 2 2
+4       4 3 3
+
+Enter available resources:
+A: 3
+B: 3
+C: 2
+
+Total resources:
+A: 10
+B: 5
+C: 7
+
+Order of execution:
+process 1
+process 3
+process 0
+process 2
+process 4
+
+Resources at end of execution
+A: 10
+B: 5
+C: 7

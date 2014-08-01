@@ -1,0 +1,9 @@
+#include <stdio.h>
+
+int main()
+{
+	char a = 0, b = 0;
+	//this is a comment
+	a = a + b;
+	return 0;
+}

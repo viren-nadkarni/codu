@@ -1,0 +1,55 @@
+Vth semester Computer Engineering(Revised Syllabus)
+Experiments for 8086 Microprocessor and Microcontroller Lab
+By N.K.Vernekar
+
+
+Expt 1. Write an assembly language program to accept two numbers. Calculate and Display sum, difference, product and quotient .
+Expt 2 Write an assembly language program to swap two numbers.
+Expt 3 Write an Assembly language program to generate Fibonacci series. Accept the order of Fibonacci series(n) from the user.
+Expt 4 Write an Assembly language program to accept n numbers and display them in reverse order.
+Expt 5 Write an Assembly language program to accept n numbers and display the highest and lowest number.
+Expt 6 Write an Assembly language program to accept n numbers and display them in
+(i)	ascending order
+(ii)	descending order 
+using at least three sorting methods( bubble, selection,insertion).
+Expt 8 Write an assembly language program to implement linear search, given n integer numbers.
+Expt 7 Write an Assembly language program to implement Binary search. Accept n numbers and an item to be searched. If an item is found , display its location or else print an error message.
+
+Expt 9 Write an Assembly language program to accept n consecutive numbers with one number missing. Determine the missing number.
+
+
+Expt 10 Write 8086/8087 assembly language program to find the following
+(i)	Area of the circle
+(ii)	Area of rectangle
+(iii)	Volume of the cube
+
+Expt 11. Write 8086/8087 assembly language program to prove the following trigonometric identities
+(i)	Sin2(?)+cos2(?)= 1
+(ii)	Tan2(?)+ 1= sec2(?)
+(iii)	1+cot2(?)= cosec2(?)
+(iv)	Cos(a+b)=cos(a)Cos(b)- sin(a) sin(b) 
+(v)	sin(?+?)=sin(?)Cos(?)+ cos(?) sin(?) 
+
+Expt 12. Write 8086/8087 program to compute the real roots of the quadratic equation.
+Expt 13 Write programs which shows the following  features of the 80286/386/486/Pentium processor
+(i)	different addressing modes
+(ii)	data definitions 
+(iii)	compare instructions
+(iv)	finding the maximum of three integer numbers
+(v)	procedures and stacks
+Expt no 14. Execute the programs from 1 to 12 given in Microcontroller book by Myke Predko.
+Exptno  15. Implement 8051 microcontroller program to interface and control
+(i)	LEDs
+(ii)	Switch
+(iii)	Keyboard
+
+Rules and Regulations:
+
+•	All students should come on time in order to start the lab practicals. Any delay will affect the time allocated for the lab sessions.
+•	All students should attend the lab in their respective sections. No student will be allowed to come outside its normal scheduled section.
+•	No student will be accepted after 15 minutes of the starting of the lab.
+•	Any absence should be followed by an official excuse one week later. All excuses beyond the allowed period will not be considered. 
+•	Lab reports, if any, should be submitted at the end of the lab session.
+•	All students are responsible to abide by the above stated rules. 
+•	Lab Syllabus given  might be updated if necessary depending on the requirement
+

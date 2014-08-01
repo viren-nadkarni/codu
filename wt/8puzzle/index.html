@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title></title>
+		<link type="text/css" rel="stylesheet" href="style.css">
+		<script type="text/javascript" src="jquery.js"></script>
+		
+		<script type="text/javascript">
+			function select(item) {
+					
+			}
+		</script>
+	<head>
+
+	<body>
+		<table id='a'>
+			<tr>
+				<td id='a1' onclick="select('a1');"></td>
+				<td id='a2' onclick="select('a2');"></td>
+				<td id='a3' onclick="select('a3');"></td>
+			</tr>
+			
+			<tr>
+				<td id='a4' onclick="select('a4');"></td>
+				<td id='a5' onclick="select('a5');"></td>
+				<td id='a6' onclick="select('a6');"></td>
+			</tr>
+			
+			<tr>
+				<td id='a7' onclick="select('a7');"></td>
+				<td id='a8' onclick="select('a8');"></td>
+				<td id='a9' onclick="select('a9');"></td>
+			</tr>
+		</table>
+		
+		
+		<script type="text/javascript">
+			var arr = '12345678 ', k = 0;
+
+			for(var i = 0; i < 3; ++i)
+				for(var j = 0; j < 3; ++j)
+					document.getElementById('a').rows[i].cells[j].innerHTML = arr[k++];
+		</script>
+		
+	</body>
+</html>
+		

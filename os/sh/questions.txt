@@ -1,0 +1,64 @@
+Given the string 'operating system'
+1. Find the length of the string
+2. Find the location of the character 't'
+3. Add a character 's' at the last
+
+II.Write a shell script to design the foll. pattern
+              1 
+           2    2
+         3   3   3
+      4   4   4   4
+   5   5   5   5   5
+6   6   6   6   6   6
+
+III. Consider a file consisting of the foll. structure
+sr.no.       name     designation    dept
+1	Ankita	Asst.prof	   mech	
+2	Shivani	tech.asst	   comp
+3	tina	lecturer	   comp
+4	sapna	lecturer	   electronics
+
+1.find the names who work in the same dept
+2.put all the names who have unique designation in diff files
+3.Add a char '|' before designation.
+
+
+1.
+#!/bin/sh
+#Shell script to find the length of the string
+
+string="Operating system"
+echo ${#string}
+expr index "Operating system" "t"
+echo $string"s"
+
+
+2.
+#!/bin/sh
+#Shell script to find the length of the string
+for i in `seq 1 6` 
+do
+for j in `seq 1 $i` 
+do
+printf $i
+done
+echo " "
+done
+
+
+3.1)
+save that table in a file called table
+#!/bin/sh
+#Shell script to find the length of the string
+echo "comp"
+grep "comp" table
+echo "mech"
+grep "mech" table
+echo "electronics"
+grep "electronics" table
+echo "ene"
+grep "ene" table
+echo "civil"
+grep "civil" table
+echo "it"
+grep "it" table

@@ -1,0 +1,39 @@
+8087 programs
+
+Write a program which shows that assembler adjusts FLD,FILD and FBLD instructions for different size of operands.
+
+Write a program to calculate the area of the circle.
+
+Write a program to compute the volume of the sphere.
+
+Write an 8087 program to compute the real roots of the quadratic equation ax2+bx+c=0 
+Where  x is given by the formula. 
+
+Write a program which determines the resonant frequency of the LC circuit. The equation for resosant frequency is given by 
+
+Calculate the hypotenuse of a right angled triangle whose sides a and b is given by SIDEA and SIDEB respectively.
+
+Assume that N  real numbers are stored in the short real format starting at location  REALARRRAY . Write an instruction sequence in 8086/8087 assembly language that would multiply the sums of all positive numbers by the sum of all negative numbers and then store the result in PRODUCT.
+
+Write an instruction sequence in 8086/8087 assembly language that would compute sine and cos  where  is greater than  0 and less then  Assume that  THETA contains angle in short real format and that the results  are to be stored in long real format.
+
+Write an 8087 program to prove 3 trigonometric identities.
+
+Write a program to compute the standard deviation, variance and median of given set of N real short numbers 
+
+
+Following programs should be treated as Home assignments
+
+To find the largest number in a data  word array.
+To find the smallest no in a data word array.
+To find the largest 8 bit number in data byte array.
+To arrange the numbers in descending order using quick sort.
+To arrange the numbers in ascending order using quick sort.
+To  implement block byte move.
+To implement block word move.
+Byte block move using REP
+Word block move using REP
+To implement the sum of a series of 16 bit numbers.( sum is 16 bit).
+To implement  the sum of a series of  16 bit numbers. ( sum is 32 bit).
+To implement the sum of 2 multibyte numbers.
+To implement product of 32 bit numbers.

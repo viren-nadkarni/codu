@@ -1,0 +1,45 @@
+Question: How would you find a loop in a singly-linked list?
+
+Answer: This is a very typical tech interview question that has a very elegant solution that runs in O(n) time and O(1) space. Also referred to as the “Tortoise and Hare Algorithm”,  the solution uses a fast pointer (traversing the list two items at a time) and a slow pointer (traversing the list one item at a time). If there is a loop, then the fast pointer will go around the loop twice as fast as the slow pointer. At one point, these two pointers will point to the same item. Here’s some code to make this clearer.
+
+bool hasLoop( Node *startNode )
+{
+    Node *slowNode, *fastNode;
+    slowNode = fastNode = startNode;
+    while( slowNode && fastNode && fastNode->next )
+    {
+        if( slowNode == fastNode->next || slowNode == fastNode->next->next )
+        {
+            return true;
+        }
+        slowNode = slowNode->next;
+        fastNode = fastNode->next->next;
+    }
+    return false;
+}
+
+The time complexity of this solution is still O(n), same as the solution provided above but this solution takes less number of steps at each point.
+
+bool hasLoop( Node *startNode )
+{
+    Node *tortoise, *hare;
+    int test_size = 2, steps_taken = 0;
+    tortoise = hare = startNode;
+    while( tortoise && hare->next )
+    {
+        hare = hare->next, steps_taken++;
+        if( tortoise == hare )
+        {
+            return true;
+        }
+        if ( steps_taken>=test_size )
+        {
+            steps_taken = 0, test_size *= 2;
+            tortoise = hare;
+        }
+    }
+    return false;
+}
+
+
+

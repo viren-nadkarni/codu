@@ -1,0 +1,13 @@
+		
+		DDA
+		Bresenham
+		Mid Point Circle
+		Mid Point Ellipse
+		Boundary Fill
+		Scanline Fill
+		Cohen Sutherland line clipping
+		Sutherland Hodgeman poly clipping
+		Bezier
+		Rotation
+		Translation
+		Scaling

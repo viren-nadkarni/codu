@@ -1,0 +1,40 @@
+1) Find name, address, bdate of employees who work for 'Administration' department.
+> select fname, minit, lname, address, bdate from employee join department on dno=dnumber where dname='Administration';
+
+2)Find all employees who earn more than each employee of 'Research' department.
+> select fname,minit,lname from employee where salary > (select max(salary) from employee join department on dno=dnumber where dname='Research');
+
+3)Retrieve last name of each employee who works on all projects controlled by 'Research' department.
+> select lname from employee, works_on where ssn=essn and pno=all 
+(select pnumber from department, project where dnumber=dnum and dname='Research') group by lname
+
+4) Find names of all employees who don't have supervisors
+> select fname, lname from employee where superssn is NULL
+
+5) List names of managers who have atleast one dependent
+> (select fname,lname from employee join department on dnumber=dno where ssn=mgrssn)intersect(select fname,lname from employee join dependent on essn=ssn);
+
+6) For each department having greater than 2 employees, retrieve dept no and no of employees who earn greater than 40,000
+> select dno,count(dno) from employee where dno in 
+(select dno from department,employee where dno=dnumber group by dno having count(dno)>2 )
+and salary>40000 group by dno
+
+7) Give all employees working on 'ProductX' project with 20% salary hike
+> update employee set salary=salary-0.2*salary where ssn in (select ssn from employee,works_on,project where ssn=essn and pno=pnumber and pname='ProductX'
+
+8) Find list of employees working on greater than 2 projects
+> select fname,lname, count(pnumber) as num_projects from employee, works_on, project where ssn=essn and pno=pnumber group by fname,lname having count(pnumber)>2
+
+9) For each employee, retrieve employee's first name and last name with salary and first name, last name and salary of his/her immediate supervisor
+> select e.fname, e.minit, e.lname, e.salary, x.fname as s_fname, x.minit as s_minit, x.lname as s_lname, x.salary as s_salary from employee as e join employee as x on e.superssn=x.ssn 
+
+10) For a project that has greater than 3 employees working on it, list project name, number of employees, average salary, managers name and controling department name
+> select a.pname,d.dname,m_fname,m_lname,emp_count,e.avg_salary from project as a,
+(select pnumber,count(pnumber) as emp_count from project,works_on where pno=pnumber group by pnumber having count(pnumber)>2) as b, 
+(select dname,pname,pnumber from project,department where dnumber=dnum) as c,
+(select dname, fname as m_fname, lname as m_lname from employee, department where mgrssn=ssn) as d,
+(select pno,avg(salary) as avg_salary from employee,works_on where ssn=essn group by pno) as e
+where a.pnumber=b.pnumber and b.pnumber=c.pnumber and c.dname=d.dname and e.pno=b.pnumber
+
+11) Find list of all employees who were born on 10th of any month in 1960's
+> select fname,lname from employee where bdate like '196_-__-10'

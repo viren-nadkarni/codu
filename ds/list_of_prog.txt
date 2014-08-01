@@ -1,0 +1,44 @@
+STACKS
+array implem
+linked implem
+*conversion of infix to postfix
+*postfix eval
+check for balanced parenthesis
+
+QUEUES
+array implem w/ compaction
+array implem circular
+linked implem
+array implem of p queue
+p queue as ordered list
+
+LISTS
+dynamic node implem
+*ops on singly list: insert,remove,reverse,concat,union,intersect
+*ops on doubly list:insert, remove,concat
+*ops on circ list: insert,remove,concat
+josephus problem
+*ops on polynomials: add, sub
+
+B TREE
+dynamic node implem
+create,insert,search
+traversals
+height
+no of nodes
+*level of a node
+
+RECURSION
+hanoi
+gcd
+nth term of rec rel
+
+SORTING & SEARCHING
+bubble
+selection
+insertion
+radix
+*heap 
+binary search
+*hash search: chaining and lin prob
+

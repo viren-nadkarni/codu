@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<title></title>		
+        <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+        <script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+        <script type="text/javascript" src="sudoku.js"></script>
+		<script language="javascript">			
+			function clear_input() {
+				for (var i = 0; i < 81; ++i)
+					document.getElementById('C'+i).value = ''
+				$('#empty').replaceWith('<div id="empty">Cleared</div>');
+				$('#empty').fadeOut(2000);
+			}
+			
+			var solver = sudoku_solver();
+			
+			function solve() {
+				var n_hints = 0;
+				s = ''
+				for (var i = 0; i < 81; ++i) {
+					var y = document.getElementById('C'+i).value
+					if (y >= 1 && y <= 9) {
+						s += ''+y;
+						++n_hints;
+					} 
+					else 
+						s += '.'
+				}
+				if (n_hints >= 15) {
+					var x = solver(s)
+					if (x.length == 0) {
+						$('#empty').replaceWith('<div id="empty">No solution</div>');
+					} 
+					else {
+						for (var i = 0; i < 81; ++i)
+							document.getElementById('C'+i).value = x[0][i]
+						if (x.length == 1) 
+							$('#empty').replaceWith('<div id="empty">Unique solution</div>');
+						else 
+							$('#empty').replaceWith('<div id="empty">Multiple solutions</div>');
+					}
+					$('#empty').fadeOut(2000);
+				} 
+				else {
+					$('#empty').replaceWith('<div id="empty">Atleast 15 hints needed</div>');
+					$('#empty').fadeOut(2000);
+				}
+			}
+			
+			function fill_sample() {
+				var sample_puzzles = '4...3.......6..8..........1....5..9..8....6...7.2........1.27..5.3....4.9........7.8...3.....2.1...5.........4.....263...8.......1...9..9.6....4....7.5...........3.7.4...........918........4.....7.....16.......25..........38..9....5...2.6.....7.8...3.....6.1...5.........4.....263...8.......1...9..9.2....4....7.5...........5..7..6....38...........2..62.4............917............35.8.4.....1......9....4..7..6....38...........2..62.5............917............43.8.5.....1......9.....4..1.2.......9.7..1..........43.6..8......5....2.....7.5..8......6..3..9........7.5.....2...4.1...3.........1.6..4..2...5...........9....37.....8....6...9.....8..8..1......5....3.......4.....6.5.7.89....2.....3.....2.....1.9..67........4...........41.9..3.....3...5.....48..7..........62.1.......6..2....5.7....8......9....7.5.....2...4.1...3.........1.6..4..2...5...........9....37.....9....8...8.....6.8.9...3.....7.1...5.........7.....263...9.......1...4..6.2....4....8.5...........1...48....5....9....6...3.....57.2..8.3.........9............4167..........2.....6.9.....8...7.1...4............6...4.2.....3..3....5...1.5...7.8...9..........2..8.5.....2...9.1...3.........6.7..4..2...5...........6....38.....1....9...4.....7.......41.9..3.....3...2.....48..7..........52.1.......5..2....6.7....8......9....4.3.....2...6.1...8...........5..97.2...3.....1..........84.....9....6...7.....5...1.....7...89..........6..26..3.......5...749...........1.4.5.83.............2..3.7..4.2....1..8..9............3..9..5.8......4.6...........5.12...7..........6........41.9..3.....3...5.....48..7..........52.1.......6..2....5.7....8......9....';
+				
+				r = ( parseInt(100 * Math.random()) % 20) * 81;
+				for(var i = 0; i < 81; ++i) {
+					if(sample_puzzles[r+i] != '.')
+						document.getElementById('C'+i).value = sample_puzzles[r+i];
+					else
+						document.getElementById('C'+i).value = '';
+				}
+				$('#empty').replaceWith('<div id="empty">Load puzzle ' + r/81 + '</div>');
+				$('#empty').fadeOut(2000);
+			}
+		</script>
+	</head>
+	
+	<body>
+		<table>
+			<tr>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C0"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C1"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C2"></td>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C3"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C4"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C5"></td>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C6"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C7"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C8"></td>
+			</tr>
+			
+			<tr>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C9"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C10"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C11"></td>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C12"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C13"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C14"></td>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C15"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C16"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C17"></td>
+			</tr>
+			
+			<tr>
+				<td class="cell3"><input class="input" size="1" maxlength="1" id="C18"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C19"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C20"></td>
+				<td class="cell3"><input class="input" size="1" maxlength="1" id="C21"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C22"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C23"></td>
+				<td class="cell3"><input class="input" size="1" maxlength="1" id="C24"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C25"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C26"></td>
+			</tr>
+			
+			<tr>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C27"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C28"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C29"></td>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C30"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C31"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C32"></td>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C33"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C34"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C35"></td>
+			</tr>
+			
+			<tr>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C36"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C37"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C38"></td>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C39"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C40"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C41"></td>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C42"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C43"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C44"></td>
+			</tr>
+			
+			<tr>
+				<td class="cell3"><input class="input" size="1" maxlength="1" id="C45"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C46"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C47"></td>
+				<td class="cell3"><input class="input" size="1" maxlength="1" id="C48"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C49"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C50"></td>
+				<td class="cell3"><input class="input" size="1" maxlength="1" id="C51"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C52"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C53"></td>
+			</tr>
+			
+			<tr>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C54"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C55"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C56"></td>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C57"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C58"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C59"></td>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C60"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C61"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C62"></td>
+			</tr>
+			
+			<tr>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C63"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C64"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C65"></td>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C66"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C67"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C68"></td>
+				<td class="cell2"><input class="input" size="1" maxlength="1" id="C69"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C70"></td>
+				<td class="cell0"><input class="input" size="1" maxlength="1" id="C71"></td>
+			</tr>
+			
+			<tr>
+				<td class="cell3"><input class="input" size="1" maxlength="1" id="C72"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C73"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C74"></td>
+				<td class="cell3"><input class="input" size="1" maxlength="1" id="C75"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C76"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C77"></td>
+				<td class="cell3"><input class="input" size="1" maxlength="1" id="C78"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C79"></td>
+				<td class="cell1"><input class="input" size="1" maxlength="1" id="C80"></td>
+			</tr>
+		</table>
+		<p>
+			<input type="button" value="Solve" onclick="solve();">
+			<input type="button" value="Clear" onclick="clear_input();">
+			<input type="button" value="Random puzzle" onclick="fill_sample();">
+		</p>
+		<div class="container">
+			<div id="empty"></div>
+		</div>
+    </body>
+</html>

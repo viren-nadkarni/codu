@@ -1,0 +1,13 @@
+the list i managed to get from alkan
+POSSIBLE LIST OF AI PROGRAMS
+
+1) water jug BFS
+2) water jug DFS
+3) tic tac toe
+4) 8 queens
+5) tower of hanoi
+6) crypt arthmethic
+7) simple perceptron learning(neural networks book jacek m zaruda)
+8) travelling salesperson graph traversal
+9) missionaries and canibals
+10)expert system for medical diagonsis (3 diseases)

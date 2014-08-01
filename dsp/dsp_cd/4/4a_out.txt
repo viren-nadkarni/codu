@@ -1,0 +1,62 @@
+
+Enter the no. Of samples in x(n):8
+
+Enter start position of samples in x(n):0
+
+Enter x(n):
+1
+-1
+2
+-2
+3
+-3
+4
+-4
+
+Enter the no. of samples in h(n):2
+
+Enter start position of samples in h(n):0
+
+Enter h(n):
+-1
+1
+ 0  1  2  3  4  5  6  7  8
+X 0 0
+  X 0 0
+    X 0 0
+      X 0 0 0  1  2  3  4  5  6  7  8
+X -3 0
+  X 0 0
+    X 0 0
+      X 0 0 0  1  2  3  4  5  6  7  8
+X -3 -3
+  X 0 0
+    X 0 0
+      X 0 0 0  1  2  3  4  5  6  7  8
+X -3 -3
+  X -3 0
+    X 0 0
+      X 0 0 0  1  2  3  4  5  6  7  8
+X -3 -3
+  X -3 -3
+    X 0 0
+      X 0 0 0  1  2  3  4  5  6  7  8
+X -3 -3
+  X -3 -3
+    X -3 0
+      X 0 0 0  1  2  3  4  5  6  7  8
+X -3 -3
+  X -3 -3
+    X -3 -3
+      X 0 0 0  1  2  3  4  5  6  7  8
+X -3 -3
+  X -3 -3
+    X -3 -3
+      X 0 0 0  1  2  3  4  5  6  7  8
+X -3 -3
+  X -3 -3
+    X -3 -3
+      X 0 0
+
+y(n)={ 0 -3 -3 -3 -3 -3 -3 0 0 }
+Samples of y start at 0

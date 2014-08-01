@@ -1,0 +1,10 @@
+1) Identification of basic categories in a program
+2) Generation of lexical analyser using tools such as lex(flex)
+3) Implementation for elimination of left recursion
+4) Implementation for left factoring
+5) Implementation for first and follow sets
+6) Implementation for predictive parser (top down parsing)
+7) Implementation of operator precedence parser (bottom up parsing)
+8) Implementation of closure and goto operations displaying lr0 items for construction of slr parsing tables
+9) Implementation of closure and goto operations displaying lr1 items for construction of canonical lr parsing tables
+10) Generation of parser using tools such as yacc (bison)

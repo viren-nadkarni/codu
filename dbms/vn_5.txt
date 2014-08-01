@@ -1,0 +1,83 @@
+1) Create a view containing the account numbers and customer names for all accounts at the 'farmagudi' branch.
+
+> create view view_1 as select account.accno,custname from account,depositor where account.accno=depositor.accno and branchname='farmagudi';
+
+--------------------------
+
+2) Create a view containing the names and addresses of all the customers who have an account with the bank at the 'ponda' branch but do not have a loan at the same branch.
+
+> create view view_2 as select customer.custname,custaddress,custcity from customer,depositor,account where customer.custname=depositor.custname and depositor.accno=account.accno and branchname='ponda' and customer.custname not in (select custname from borrower,loan where loan.loanno=borrower.loanno and branchname='ponda');
+
+--------------------------
+
+3) Create a view containing the name and average account balance of every customer of the 'ponda' branch.
+
+> create view view_3 as select custname,avg(balance) as avg_bal from account join depositor on account.accno=depositor.accno where branchname='ponda' group by custname;
+
+--------------------------
+
+4) Use the first and the third view created above to create a new view containing accno, name, and average account balance of the customer. Using the average balance and the balance from the original account table, determine whether the customer has one or more than one account.
+
+> create view view_4 as select accno,view_1.custname,avg_bal from view_1 join view_3 on view_1.custname=view_3.custname;
+
+> select custname as cust_with_1_account from view_4,
+
+--------------------------
+
+5) Find all branches where the total account deposit is less than the average total account deposit at all the branches:
+
+a) Using a nested query in the from clause
+
+> select branchname from (select avg(balance) as avg_bal from account) as x, account where x.avg_bal>balance;
+
+b) Using a nested query in the having clause
+
+> select branchname from account group by branchname having avg(balance)<(select avg(balance) from account)
+
+--------------------------
+
+6) Pay 5% interest on accounts whose balance is greater than average.
+
+> update account set balance=balance+balance*0.05 where balance>(select avg(balance) from account)
+
+--------------------------
+
+7) Pay all accounts with balances over 10,000 recieve a 6% interest whereas all others recieve a 5% interest.
+
+> update account set balance=
+			case
+				when balance>10000 then balance+0.06*balance
+				else balance+0.05*balance
+			end
+
+--------------------------
+
+8) Read 4 users 'se_comp', 'te_comp', 'be_comp', 'staff'. Grant all privileges on all the relations to the user Staff with grant options. Give select privileges on all the relations to all the users. Give update privileges on 'employee' table to BE_Comp user with grant privileges. Give update privileges on address attribute of the 'employee' table to TE_Comp and they should not be able to give this privileges to any other user. Login as different newly created users and check the privileges.
+
+> create user se_comp identified by secomp123
+  create user te_comp identified by tecomp123
+  create user be_comp identified by becomp123
+  create user staff identified by staff123
+
+  grant select on all to public;
+  grant update on employee to be_comp with grant option;
+  grant update(address) on employee to te_comp;
+
+
+--------------------------------------------------------------------------------------------
+
+CREATE USER <user_name> IDENTIFIED BY <password>
+
+GRANT <privilege_list> ON <relation_view_name> TO <user_list> WITH GRANT OPTION;
+	all												public
+	update(attribute)
+
+REVOKE <privilege_list> ON <relation> FROM <user_list> RESTRICT|CASCADE;
+
+UPDATE employee
+	SET salary=
+	CASE
+		WHEN salary<5000 THEN salary+1000
+		WHEN salary>=5000 THEN salary+2000
+		ELSE salary+500
+	END;

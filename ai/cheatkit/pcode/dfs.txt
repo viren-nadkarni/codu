@@ -1,0 +1,10 @@
+procedure DFS(G,v):
+    label v as explored
+    for all edges e in G.adjacentEdges(v) do
+        if edge e is unexplored then
+            w = G.adjacentVertex(v,e)
+            if vertex w is unexplored then
+                label e as a discovery edge
+                recursively call DFS(G,w)
+            else
+                label e as a back edge

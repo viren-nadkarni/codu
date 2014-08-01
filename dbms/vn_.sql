@@ -1,0 +1,1 @@
+select t1.rollnum, fullname, branch, sub1, sub2, sub3, (sub1+sub2+sub3)/3 as average from t1,t2 where t1.rollnum=t2.rollnum order by t1.rollnum 
